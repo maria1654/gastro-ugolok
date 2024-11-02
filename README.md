@@ -104,7 +104,6 @@ gastro-ugolok/
 ├── static/
 │   └── ... (CSS, изображения)
 ├── .env.example
-├── db.py
 ├── requirements.txt
 └── README.md
 ```
