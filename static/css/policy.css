@@ -1,0 +1,22 @@
+li {
+	margin-left: 2em;
+}
+
+.content-block {
+    background-color: white;
+    max-width: 75%;
+    padding: 1em 2em;
+    margin: 1em 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+
+    box-shadow: 0 0 1em 0.2em rgba(0, 0, 0, 0.3);
+    border-radius: 2em;
+}
+
+.date {
+	color: #8f8f8f;
+	font-size: 0.75em;
+}

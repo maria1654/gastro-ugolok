@@ -1,0 +1,85 @@
+<!-- templates/account.html -->
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}Гастро-уголок ▶ Аккаунт{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', path='css/account.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content-block">
+    <!-- Левый блок -->
+    <div class="left-section">
+        <!-- Avatar Block -->
+        <div class="avatar-block">
+            <img src="{{ url_for('static', path='images/default-avata.png') }}" alt="Аватар">
+            <h4>{{ user }}</h4>
+        </div>
+        <!-- Menu Block -->
+        <div class="menu-block">
+            <ul>
+                <li><a href="#" onclick="showContent('fovarite')">Избранное</a></li>
+                <li><a href="#" onclick="showContent('history')">История</a></li>
+                <li><a href="#" onclick="showContent('chat')">Чат</a></li>
+                <li><a href="#" onclick="showContent('settings')">Настройки</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Правый блок -->
+    <div class="right-section">
+        <!-- Контент, который меняется через меню -->
+        <div class="content">
+            <!-- Избранные рецепты -->
+            <div id="fovarite" class="content-section">
+                <h2>Избранное</h2>
+                <h4>Здесь будет список любимых рецептов</h4>
+            </div>
+            <!-- История просмотренных рецептов -->
+            <div id="history" class="content-section active">
+                <h2>История</h2>
+                <h4>Здесь будет история просмотренных рецептов</h4>
+            </div>
+            <!-- Чат -->
+            <div id="chat" class="content-section">
+                <h2>Чат</h2>
+                <h4>Здесь будет простой чат</h4>
+            </div>
+            <!-- Настройки -->
+            <div id="settings" class="content-section">
+                <h2>Настройки</h2>
+                <h4>Здесь будут настройки аккаунта</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function showContent(sectionId) {
+    // Скрываем все разделы контента
+    const contentSections = document.querySelectorAll('.content-section');
+    contentSections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // Отображаем выбранный раздел
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.add('active');
+    }
+
+    // Обновляем активный пункт меню
+    const menuLinks = document.querySelectorAll('.menu-block ul li a');
+    menuLinks.forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // Добавляем класс 'active' к выбранному пункту меню
+    const activeLink = document.querySelector(`.menu-block ul li a[onclick="showContent('${sectionId}')"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+</script>
+{% endblock %}

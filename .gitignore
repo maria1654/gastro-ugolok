@@ -1,0 +1,13 @@
+# .gitignore
+
+.env
+.webserver
+venv
+users.db
+host.bat
+db.py
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd

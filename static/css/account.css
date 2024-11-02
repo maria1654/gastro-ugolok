@@ -1,0 +1,176 @@
+/* Общие стили для content-block */
+/* Общие стили для content-block */
+.content-block {
+    display: flex;
+    justify-content: center;
+    /* align-items: stretch; */ /* Можно оставить или удалить по необходимости */
+    margin: 0 auto;
+    width: 75%;
+    box-sizing: border-box;
+    /* height: 98%; */ /* Удалено */
+}
+
+/* Левый и правый блоки внутри content-block */
+.left-section {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    flex: 0 0 auto; /* Добавлено */
+}
+
+.right-section {
+    padding: 1em;
+    background: white;
+    border-radius: 1em;
+    box-shadow: 0 0 1em 0.2em rgba(0, 0, 0, 0.3);
+    width: 70%;
+    box-sizing: border-box;
+    overflow: auto;
+    flex: 1 1 auto; /* Добавлено */
+}
+
+.avatar-block {
+    padding: 1em;
+    background: white;
+    border-radius: 1em;
+    box-shadow: 0 0 1em 0.2em rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.avatar-block img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.menu-block {
+    display: flex;
+    justify-content: center;
+    padding: 0.75em;
+    background: white;
+    border-radius: 1em;
+    box-shadow: 0 0 1em 0.2em rgba(0, 0, 0, 0.3);
+    flex: 2; /* Добавлено */
+}
+
+.menu-block ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-block ul li {
+    margin-bottom: 1.1em;
+}
+
+.menu-block ul li a {
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out, transform 0.3s;
+    background: white;
+    text-decoration: none;
+    color: black;
+    font-size: 1em;
+    border-radius: 1em;
+    padding: 0.3em 0.5em;
+}
+
+.menu-block ul li a:hover {
+    transform: translateX(10px);
+    background: #f0f0f0;
+}
+
+/* Стили для контента в right-section */
+.content-section {
+    display: none; /* Скрываем все секции по умолчанию */
+}
+
+.content-section.active {
+    display: block; /* Отображаем активную секцию */
+}
+
+/* Пример стилей для истории просмотренных рецептов */
+.history {
+    /* Стили для истории */
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 999px) {
+    .content-block {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        align-items: stretch; /* Добавлено */
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        padding: 1em;
+        flex-shrink: 0;
+    }
+
+    .left-section {
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .avatar-block {
+        max-width: 50%;
+        margin-right: 5%;
+        margin-bottom: 0;
+    }
+
+    .menu-block {
+        max-width: 30%;
+        flex-direction: row;
+    }
+
+    .menu-block ul li {
+    margin: 0.5em
+    }
+
+    .menu-block ul li a:hover {
+        transform: translateX(0px);
+        background: #f0f0f0;
+    }
+
+    a {
+        padding: 0.2em 0.4em;
+    }
+}
+
+@media (min-width: 1000px) {
+    .content-block {
+        min-height: 100%;
+    }
+
+    .menu-block {
+        max-width: 100%;
+    }
+
+    .menu-block ul li a {
+        font-size: 1.25em;
+    }
+}
+
+@media (min-width: 769px, max-width: 999px) {
+    .menu-block {
+        max-width: 45%;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 420px) {
+    .menu-block ul li a {
+        font-size: 0.75em;
+    }
+}
+
+.menu-block ul li a.active {
+    font-weight: bold;
+    background: #f0f0f0;
+}
