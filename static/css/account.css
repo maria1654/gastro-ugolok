@@ -1,23 +1,18 @@
-/* Общие стили для content-block */
-/* Общие стили для content-block */
 .content-block {
     display: flex;
     justify-content: center;
-    /* align-items: stretch; */ /* Можно оставить или удалить по необходимости */
     margin: 0 auto;
     width: 75%;
     box-sizing: border-box;
-    /* height: 98%; */ /* Удалено */
 }
 
-/* Левый и правый блоки внутри content-block */
 .left-section {
     display: flex;
     flex-direction: column;
     width: 20%;
     padding-right: 20px;
     box-sizing: border-box;
-    flex: 0 0 auto; /* Добавлено */
+    flex: 0 0 auto;
 }
 
 .right-section {
@@ -28,7 +23,7 @@
     width: 70%;
     box-sizing: border-box;
     overflow: auto;
-    flex: 1 1 auto; /* Добавлено */
+    flex: 1 1 auto;
 }
 
 .avatar-block {
@@ -54,7 +49,7 @@
     background: white;
     border-radius: 1em;
     box-shadow: 0 0 1em 0.2em rgba(0, 0, 0, 0.3);
-    flex: 2; /* Добавлено */
+    flex: 2;
 }
 
 .menu-block ul {
@@ -82,27 +77,20 @@
     background: #f0f0f0;
 }
 
-/* Стили для контента в right-section */
 .content-section {
-    display: none; /* Скрываем все секции по умолчанию */
+    display: none;
 }
 
 .content-section.active {
-    display: block; /* Отображаем активную секцию */
+    display: block;
 }
 
-/* Пример стилей для истории просмотренных рецептов */
-.history {
-    /* Стили для истории */
-}
-
-/* Адаптивность для мобильных устройств */
 @media (max-width: 999px) {
     .content-block {
         flex-direction: column;
         width: 100%;
         height: 100%;
-        align-items: stretch; /* Добавлено */
+        align-items: stretch;
     }
 
     .left-section,
@@ -130,7 +118,7 @@
     }
 
     .menu-block ul li {
-    margin: 0.5em
+        margin: 0.5em;
     }
 
     .menu-block ul li a:hover {
