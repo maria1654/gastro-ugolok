@@ -1,14 +1,41 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
 
-{% block title %}Гастро-уголок ▶ Главная{% endblock %}
+{% block title %}Гастро-уголок ▶ Каталог{% endblock %}
 
 {% block head %}
-    <link rel="FILE_TYPE" href="{{ url_for('static', path='') }}">
+    <link rel="stylesheet" href="{{ url_for('styles', path='catalog.css') }}">
 {% endblock %}
 
 {% block content %}
 <content>
-    <h1 class="description">Тут будет каталог 😊</h1>
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+            {% if loop.index0 % 4 == 0 %}
+                <div class="recipe-row">
+            {% endif %}
+            
+            <div class="recipe-card">
+                <a href="/recipe?rid={{ recipe.rid }}" class="card-link">
+                    <h2>{{ recipe.name }}</h2>
+                    <img src="/recipes/{{recipe.rid}}/title.jpg?v={{ recipe.image_timestamp }}" alt="{{ recipe.name }}">
+                    <p>Время приготовления: {{ recipe.time }}</p>
+                    <span class="details-button">Подробнее</span>
+                </a>
+            </div>
+            
+            {% if loop.index % 4 == 0 or loop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Пагинация -->
+    <div class="pagination">
+        {% for page in range(1, total_pages + 1) %}
+            <a href="?page={{ page }}" {% if page == current_page %}class="active"{% endif %}>
+                {{ page }}
+            </a>
+        {% endfor %}
+    </div>
 </content>
 {% endblock %}

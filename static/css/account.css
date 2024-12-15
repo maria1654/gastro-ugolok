@@ -69,7 +69,7 @@
     color: black;
     font-size: 1em;
     border-radius: 1em;
-    padding: 0.3em 0.5em;
+    padding: 0.25em 0.25em;
 }
 
 .menu-block ul li a:hover {
@@ -145,7 +145,7 @@
     }
 }
 
-@media (min-width: 769px, max-width: 999px) {
+@media (min-width: 769px) and (max-width: 999px) {
     .menu-block {
         max-width: 45%;
         flex-direction: row;

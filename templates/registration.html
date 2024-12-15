@@ -5,7 +5,7 @@
 {% block title %}Гастро-уголок ▶ Регистрация{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', path='css/registration.css') }}">
+    <link rel="stylesheet" href="{{ url_for('styles', path='registration.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -44,7 +44,6 @@
 
         <div class="form-actions">
             <button type="submit" class="btn">Регистрация</button>
-            <a href="/login" class="btn secondary">Вход</a>
         </div>
     </form>
 </div>

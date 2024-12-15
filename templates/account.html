@@ -5,7 +5,7 @@
 {% block title %}Гастро-уголок ▶ Аккаунт{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', path='css/account.css') }}">
+    <link rel="stylesheet" href="{{ url_for('styles', path='account.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -14,16 +14,19 @@
     <div class="left-section">
         <!-- Avatar Block -->
         <div class="avatar-block">
-            <img src="{{ url_for('static', path='images/default-avata.png') }}" alt="Аватар">
+            <img src="{{ url_for('images', path='default-avata.png') }}" alt="Аватар">
             <h4>{{ user }}</h4>
         </div>
         <!-- Menu Block -->
         <div class="menu-block">
             <ul>
-                <li><a href="#" onclick="showContent('fovarite')">Избранное</a></li>
+                <li><a href="#" onclick="showContent('favorite')">Избранное</a></li>
                 <li><a href="#" onclick="showContent('history')">История</a></li>
                 <li><a href="#" onclick="showContent('chat')">Чат</a></li>
                 <li><a href="#" onclick="showContent('settings')">Настройки</a></li>
+                {% if request.session.get('role') == 'admin' and request.session.get('admin_session_id') %}
+                <li><a href="#" onclick="showContent('admin')">Админ-панель</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -33,24 +36,43 @@
         <!-- Контент, который меняется через меню -->
         <div class="content">
             <!-- Избранные рецепты -->
-            <div id="fovarite" class="content-section">
+            <div id="favorite" class="content-section">
                 <h2>Избранное</h2>
-                <h4>Здесь будет список любимых рецептов</h4>
+                <div class="content-block">
+                    {% include 'account/favorite.html' %}
+                </div>
             </div>
             <!-- История просмотренных рецептов -->
             <div id="history" class="content-section active">
                 <h2>История</h2>
-                <h4>Здесь будет история просмотренных рецептов</h4>
+                <div class="content-block">
+                    {% include 'account/history.html' %}
+                </div>
             </div>
             <!-- Чат -->
             <div id="chat" class="content-section">
                 <h2>Чат</h2>
-                <h4>Здесь будет простой чат</h4>
+                <div class="content-block">
+                    {% include 'account/chat.html' %}
+                </div>
             </div>
             <!-- Настройки -->
             <div id="settings" class="content-section">
                 <h2>Настройки</h2>
-                <h4>Здесь будут настройки аккаунта</h4>
+                <div class="content-block">
+                    {% include 'account/settings.html' %}
+                </div>
+            </div>
+            <!-- Админ-панель -->
+            <div id="admin" class="content-section">
+                <h2>Админ-панель</h2>
+                <div class="content-block">
+                    {% if request.session.get('role') == 'admin' and request.session.get('admin_session_id') %}
+                        {% include 'account/admin.html' %}
+                    {% else %}
+                        <p>У вас нет доступа к админ-панели</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Гастро-уголок ▶ 404{% endblock %}
+{% block title %}Гастро-уголок ▶ 403{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('styles', path='error.css') }}">
@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="content-block">
-    <h1 class="error-code">404</h1>
-    <p class="description">Такой страницы у нас не существует :с</p>
+    <h1 class="error-code">403</h1>
+    <p class="description">Доступ запрещен ⛔</p>
 </div>
 {% endblock %}

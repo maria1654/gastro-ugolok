@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Гастро-уголок ▶ {% if is_new %}Создание{% else %}Редактирование{% endif %} рецепта{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('styles', path='edit_recipe.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="edit-container">
+    <h1>{% if is_new %}Создание нового рецепта{% else %}Редактирование рецепта{% endif %}</h1>
+    <form id="recipe-form">
+        <input type="hidden" id="recipe-id" value="{{ rid }}">
+        <input type="hidden" id="is-new" value="{{ 'true' if is_new else 'false' }}">
+        
+        <div class="form-group">
+            <h3>Обложка рецепта:</h3>
+            <div class="image-upload-container">
+                <img id="recipe-image" src="{% if not is_new %}/recipes/{{rid}}/title.jpg?v={{ timestamp }}{% else %}/images/default-recipe.jpg{% endif %}" alt="Изображение рецепта">
+                <div class="image-upload-controls">
+                    <label for="image-upload" class="upload-btn">Загрузить изображение</label>
+                    <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h3 for="name">Название:</h3>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <h3 for="time">Время приготовления:</h3>
+            <input type="text" id="time" name="time" required>
+        </div>
+
+        <div class="form-group">
+            <h3>Ингредиенты:</h3>
+            <div id="ingredients-container"></div>
+            <button type="button" class="add-btn" onclick="addIngredient()">Добавить ингредиент</button>
+        </div>
+
+        <div class="form-group">
+            <h3>Этапы приготовления:</h3>
+            <div id="stages-container"></div>
+            <button type="button" class="add-btn" onclick="addStage()">Добавить этап</button>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="save-btn">{% if is_new %}Создать{% else %}Сохранить{% endif %}</button>
+            {% if not is_new %}
+            <button type="button" class="delete-btn" onclick="deleteRecipe()">Удалить рецепт</button>
+            {% endif %}
+            <button type="button" class="cancel-btn" onclick="window.location.href='/catalog'">Отмена</button>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('js', path='edit_recipe.js') }}"></script>
+{% endblock %}

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
 
 {% block title %}Гастро-уголок ▶ Главная{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', path='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('styles', path='index.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 {% endblock %}
 
@@ -12,75 +11,46 @@
 <section>
     <h1 class="top-container">Топ недели</h1>
     <div class="container">
+        {% for recipe in popular_recipes %}
         <div class="card">
             <div class="card-inner" style="--clr:#fff;">
                 <div class="box">
                     <div class="imgBox">
-                        <img src="{{ url_for('static', path='images/examples/1.jpg') }}" alt="Trust & Co.">
+                        <img src="{{ url_for('recipes', path='/' + recipe.rid + '/title.jpg') }}" alt="{{ recipe.title }}">
                     </div>
                     <div class="icon">
-                        <a href="/catalog/70523" class="iconBox"> <span class="material-symbols-outlined">
-                            arrow_outward
-                          </span></a>
+                        <a href="/recipe?rid={{ recipe.rid }}" class="iconBox">
+                            <span class="material-symbols-outlined">arrow_outward</span>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="content">
-                <h3>Гаспачо</h3>
-                <p>Наполни свою жизнь томаткой</p>
                 <ul>
                     <li style="--clr-tag:#d3b19a;" class="branding">в топе</li>
-                    <li style="--clr-tag:#70b3b1;" class="packaging">овощи</li>
+                    <li style="--clr-tag:#e6a23c;" class="time">
+                        <span class="material-symbols-outlined">schedule</span>
+                        {{ recipe.time }}
+                    </li>
+                    {% if recipe.tags %}
+                        {% for tag in recipe.tags[:2] %}
+                        <li style="--clr-tag:#70b3b1;" class="packaging">{{ tag }}</li>
+                        {% endfor %}
+                    {% endif %}
                 </ul>
+                <h2 class="recipe-name">{{ recipe.name }}</h2>
             </div>
         </div>
+        {% else %}
         <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="{{ url_for('static', path='images/examples/2.jpg') }}" alt="Tonic">
-                    </div>
-                    <div class="icon">
-                        <a href="/catalog/127923" class="iconBox"> <span class="material-symbols-outlined">
-                            arrow_outward
-                          </span></a>
-                    </div>
-                </div>
-            </div>
             <div class="content">
-                <h3>Шаурмяу с аниме</h3>
-                <p>Ня!</p>
-                <ul>
-                    <li style="--clr-tag:#d3b19a;" class="branding">в топе</li>
-                    <li style="--clr-tag:#70b3b1;" class="packaging">овощи</li>
-                    <li style="--clr-tag:#d05fa2;" class="marketing">мясо</li>
-                </ul>
+                <h3>Нет популярных рецептов</h3>
+                <p>Попробуйте зайти позже</p>
             </div>
         </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="{{ url_for('static', path='images/examples/3.jpg') }}" alt="Shower Gel">
-                    </div>
-                    <div class="icon">
-                        <a href="/catalog/358920" class="iconBox"> <span class="material-symbols-outlined">
-                            arrow_outward
-                          </span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Сендвич с фильма</h3>
-                <p>Помидорный бум! 💥</p>
-                <ul>
-                    <li style="--clr-tag:#d3b19a;" class="branding">в топе</li>
-                    <li style="--clr-tag:#70b3b1;" class="packaging">овощи</li>
-                </ul>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </section>
 
-<script src="{{ url_for('static', path='js/arrow-color.js') }}"></script>
+<script src="{{ url_for('js', path='arrow-color.js') }}"></script>
 {% endblock %}

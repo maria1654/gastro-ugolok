@@ -1,9 +1,7 @@
-import os
 from passlib.context import CryptContext
 from dotenv import load_dotenv
 
-from app.models import UserInDB
-from app.database import get_user, create_user_in_db
+from app.crud.base import get_user, create_user as create_user_in_db
 
 load_dotenv()
 

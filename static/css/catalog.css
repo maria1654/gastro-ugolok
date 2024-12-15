@@ -1,0 +1,129 @@
+.recipe-grid {
+    width: calc(min(76.5rem, 90%));
+    margin-inline: auto;
+    padding: 2em;
+    overflow-x: hidden;
+}
+
+.recipe-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipe-card {
+    flex: 1;
+    min-width: 14em;
+    max-width: 16em;
+    position: relative;
+    background: white;
+    border-radius: 1em;
+    overflow: hidden;
+    box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: scale(1.05);
+}
+
+.recipe-card h2 {
+    padding: 1em;
+    margin: 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 15em;
+    object-fit: cover;
+}
+
+.recipe-card p {
+    padding: 0.8em 1em;
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.recipe-card a {
+    display: block;
+    padding: 1em;
+    text-align: center;
+    text-decoration: none;
+    color: #DEB887;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.recipe-card a:hover {
+    background-color: #faf5f5;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin: 2em 0;
+}
+
+.pagination a {
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #303030;
+    background: white;
+    border-radius: 0.5em;
+    transition: all 0.3s ease;
+    box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.1);
+}
+
+.pagination a:hover {
+    background: #f0f0f0;
+}
+
+.pagination a.active {
+    background: #DEB887;
+    color: white;
+}
+
+/* Мобильные стили */
+@media (max-width: 1190px) {
+    .recipe-card {
+        min-width: 20em;
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recipe-card {
+        min-width: calc(100% - 2rem);
+        max-width: 20em;
+    }
+
+    .recipe-card img {
+        height: 16em;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
+
+
+html, body, #root, .container {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+} 

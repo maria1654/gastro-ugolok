@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Гастро-уголок ▶ {{ recipe.name }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('styles', path='recipe.css') }}">
+{% endblock %}
+
+{% block content %}
+<article class="recipe-container">
+    <div class="recipe-image">
+        <h1>{{ recipe.name }}</h1>
+        <img src="/recipes/{{recipe.rid}}/title.jpg?v={{ recipe.image_timestamp }}" alt="{{ recipe.name }}">
+        <div class="recipe-meta">
+            <span class="cooking-time">⏱ {{ recipe.time }}</span>
+        </div>
+    </div>
+    <div class="recipe-content">
+        <section class="ingredients">
+            <h2>Ингредиенты</h2>
+            <ul>
+                {% for ingredient, amount in recipe.ingredient.items() %}
+                <li>{{ ingredient }} - {{ amount }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="instructions">
+            <h2>Приготовление</h2>
+            <ol>
+                {% for step_key, step in recipe.stage.items() %}
+                <li>
+                    <div class="step-text">
+                        <strong>Шаг {{ loop.index }}:</strong> {{ step }}
+                    </div>
+                    {% set step_index = loop.index %}
+                    {% if recipe.images[step_key] %}
+                        <div class="step-images">
+                            {% for image in recipe.images[step_key] %}
+                            <figure>
+                                <img src="/recipes/{{recipe.rid}}/{{ image }}?v={{ recipe.image_timestamp }}" 
+                                     alt="Шаг {{ step_index }} - изображение {{ loop.index }}">
+                                <figcaption>Шаг {{ step_index }}.{{ loop.index }}</figcaption>
+                            </figure>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
+    </div>
+</article>
+{% endblock %} 

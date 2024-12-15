@@ -1,32 +1,48 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, APIRouter
 from fastapi.templating import Jinja2Templates
-from starlette.middleware.sessions import SessionMiddleware
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import RedirectResponse
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
-import os
 
-from app.routers import main_router, auth_router
-from app.database import create_users_table
+from app.web.routers import main_router, auth_router, admin_router
+from app.crud.base import check_and_create_tables
+from app.api.routers import db_routers
+from app.web.middleware import setup_middleware
 
 load_dotenv()
 
 app = FastAPI()
 
-app.add_middleware(
-    SessionMiddleware,
-    secret_key=os.getenv("SESSION_SECRET_KEY"),
-    session_cookie="session_id"
-)
+setup_middleware(app)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
-app.include_router(main_router.router)
-app.include_router(auth_router.router)
+static_paths = {
+    "styles": "css",
+    "js": "js",
+    "fonts": "fonts", 
+    "images": "images",
+    "recipes": "recipesbase"
+}
+for path, directory in static_paths.items():
+    app.mount(f"/{path}", StaticFiles(directory=f"static/{directory}"), name=path)
 
 templates = Jinja2Templates(directory="templates")
 
-# Обработчики исключений
+router = APIRouter()
+
+@router.get("/403")
+async def forbidden_page(request: Request):
+    return templates.TemplateResponse(
+        "403.html",
+        {"request": request},
+        status_code=403
+    )
+
+app.include_router(router)
+
+app.include_router(main_router.router)
+app.include_router(auth_router.router)
+app.include_router(admin_router.router)
+app.include_router(db_routers.router)
 
 @app.exception_handler(404)
 async def not_found(request: Request, exc):
@@ -34,8 +50,13 @@ async def not_found(request: Request, exc):
 
 @app.exception_handler(405)
 async def method_not_allowed(request: Request, exc):
+    if request.url.path.startswith('/api'):
+        return JSONResponse(
+            status_code=405,
+            content={"detail": "Метод не разрешен"}
+        )
     return templates.TemplateResponse("405.html", {"request": request}, status_code=405)
 
 @app.on_event("startup")
-def startup_event():
-    create_users_table()
+async def startup_event():
+    check_and_create_tables()

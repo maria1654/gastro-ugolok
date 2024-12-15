@@ -27,9 +27,6 @@ form {
     width: 100%;
 }
 
-.form-group {
-}
-
 input[type="text"], input[type="password"] {
     width: 100%;
     margin-top: 0.2em;
@@ -55,8 +52,8 @@ input[type="text"]:focus, input[type="password"]:focus {
 }
 
 .btn {
-    margin-top: 0.2em;
-    padding: 0.5em;
+    margin-top: 1.6em;
+    padding: 0.75em;
     background-color: #007bff;
     
     color: white;
@@ -65,7 +62,7 @@ input[type="text"]:focus, input[type="password"]:focus {
     text-align: center;
 
     border: none;
-    border-radius: 4px;
+    border-radius: 1em;
 
     cursor: pointer;
 }

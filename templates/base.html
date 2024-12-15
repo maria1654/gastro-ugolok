@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Гастро-уголок{% endblock %}</title>
     {% block head %}{% endblock %}
-    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}">
-    <link rel="icon" href="{{ url_for('static', path='images/favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('styles', path='base.css') }}">
+    <link rel="icon" href="{{ url_for('images', path='favicon.png') }}" type="image/png">
 </head>
 <body>
     <header>
         <nav>
             <a class="navbutton" href="/">Главная</a>
             <a class="navbutton" href="/catalog">Каталог</a>
-            <a class="navbutton" href="/randrecepie">Мне повезет!</a>
+            <a class="navbutton" href="/itsfine">Мне повезет!</a>
             <a id="account-link" class="navbutton" href="/account">Кабинет</a>
         </nav>
     </header>
@@ -34,14 +34,20 @@
     <footer>
         <p>&copy; 2024 Гастро-уголок</p>
     </footer>
-    <script src="{{ url_for('static', path='js/fade.js') }}"></script>
-    <script src="{{ url_for('static', path='js/cookie.js') }}"></script>
-
+    <script src="{{ url_for('js', path='fade.js') }}"></script>
+    <script src="{{ url_for('js', path='cookie.js') }}"></script>
     <script>
-    if (isUserLoggedIn && currentPage === '/account') {
-        document.getElementById('account-link').textContent = 'Выйти';
-        document.getElementById('account-link').href = '/logout';
-    }
+        const isUserLoggedIn = "{{ isUserLoggedIn }}";
+        const currentPage = "{{ currentPage }}";
+        const userRole = "{{ request.session.get('role') }}";
     </script>
+    <script src="{{ url_for('js', path='edit-button.js') }}"></script>
+    <div id="custom-alert" class="custom-alert" style="display: none;">
+        <div class="alert-content">
+            <p id="alert-message"></p>
+            <button onclick="closeCustomAlert()">OK</button>
+        </div>
+    </div>
+    <script src="{{ url_for('js', path='custom-alert.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,229 @@
+.edit-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.form-group:nth-child(2),
+.form-group:nth-child(3) {
+    border: none;
+    padding: 0;
+}
+
+h3 {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+input[type="text"], textarea {
+    width: 82.2%;
+    padding: 0.75rem;
+    border: 2px solid #eaeaea;
+    border-radius: 1em;
+    transition: border-color 0.2s ease;
+}
+
+input[name="ingredient-name"]::placeholder,
+input[name="ingredient-amount"]::placeholder {
+    font-size: 0.75em;
+}
+
+#name, #time, #ingredient-name {
+    margin-left: 1.55em;
+}
+
+#ingredient-amount{
+    width: 25%;
+}
+
+
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+}
+
+.ingredient-row, .stage-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    border: none;
+    border-radius: 8p;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.ingredient-remove {
+    padding: 0 0 0.1em 0;
+}
+
+.stage-remove {
+    margin: auto;
+    margin-left: 0.4em;
+}
+
+.add-btn {
+    display: block;
+    width: 100%;
+    margin: 0;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 0.5em 0em;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.add-btn:hover {
+    background-color: #14a250;
+    transform: translateY(-1px);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.save-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.save-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.cancel-btn:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-1px);
+}
+
+.stage-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 1em 0 0 0;
+    border-radius: 8px;
+}
+
+textarea[name="stage"] {
+    margin: 0;
+    min-height: 6em;
+    resize: vertical;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border: 2px solid #eaeaea;
+    border-radius: 1em;
+}
+
+.stage-number {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 1rem;
+    padding-top: 0.5rem;
+}
+
+.ingredient-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+input[name="ingredient"] {
+    flex-grow: 1;
+}
+
+.image-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+#recipe-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.image-upload-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upload-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.upload-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #991c28;
+    transform: translateY(-1px);
+}
