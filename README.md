@@ -19,11 +19,34 @@
 
 ## Технологии
 
-- **Backend**: FastAPI
-- **Frontend**: HTML, CSS, Jinja2 Templates
-- **База данных**: SQLite
-- **Аутентификация**: SessionMiddleware, Passlib для хеширования паролей
-- **Деплоймент**: Uvicorn
+### Backend
+- **FastAPI**: Современный веб-фреймворк для создания API с поддержкой асинхронности
+- **Uvicorn**: ASGI-сервер для запуска FastAPI приложения 
+- **Starlette**: Базовый фреймворк с поддержкой сессий и middleware
+- **Pydantic**: Валидация данных и сериализация моделей
+
+### Frontend
+- **Jinja2**: Шаблонизатор для генерации HTML-страниц
+- **HTML5/CSS3**: Разметка и стилизация страниц
+- **JavaScript**: Интерактивность на стороне клиента
+- **AJAX**: Асинхронные запросы к API
+
+### База данных
+- **SQLite**: Локальная файловая база данных
+- **MySQL**: Опциональная поддержка для продакшена
+- **Поддержка миграции**: Автоматическое создание таблиц при первом запуске
+
+### Безопасность
+- **Passlib**: Хеширование паролей с использованием bcrypt
+- **SessionMiddleware**: Управление пользовательскими сессиями
+- **CSRF-защита**: Токены для защиты от межсайтовой подделки запросов
+- **Cookie-политика**: Настраиваемые параметры безопасности для cookie
+
+### Дополнительные инструменты
+- **Pillow**: Обработка и оптимизация изображений
+- **python-dotenv**: Управление переменными окружения
+- **httpx**: Асинхронный HTTP-клиент для внутренних запросов
+- **logging**: Система логирования для отслеживания ошибок
 
 ## Установка и запуск
 
@@ -44,7 +67,7 @@
 2. **Создание и активации виртуального окружения**
 
    ```bash
-   python3 -m venv venv
+   python -m venv venv
    # Для Windows
    venv\Scripts\activate
    # Для Linux/MacOS
@@ -62,25 +85,37 @@
    Создайте файл `.env` в корневой директории и добавьте следующие переменные:
 
    ```ini
-   SESSION_SECRET_KEY=your_session_secret_key
-   SECRET_KEY=your_jwt_secret_key
+   # Security keys
+   SESSION_SECRET_KEY=your_session_secret_key_here
+   SECRET_KEY=your_secret_key_here
    ALGORITHM=HS256
-   ACCESS_TOKEN_EXPIRE_MINUTES=30
+   CSRF_SECRET=your_csrf_secret_here
+
+   # data base setting
+   DATABASE_URL=your_database_url_here
+
+   # API key
+   API_KEY=your_api_key_here
+
+   # cookies and session setting
+   SECURE_COOKIES=true
+   SAME_SITE_POLICY=lax
+   SESSION_LIFETIME=3600
    ```
 
-   Замените `your_session_secret_key` и `your_jwt_secret_key` на ваши собственные секретные ключи.
+   Замените соответствующие поля на ваши собственные секретные ключи.
 
 5. **Запуск приложения**
 
    ```bash
-   uvicorn app.main:app --reload
+   uvicorn app.main:app --reload --port 80
    ```
-
-   Приложение будет доступно по адресу `http://127.0.0.1:8000`.
+   Приложение будет доступно по адресу `http://127.0.0.1`.
+   (в данный момент api работает только с портом 80)
 
 ## Использование
 
-- Перейдите на `http://127.0.0.1:8000` в вашем браузере.
+- Перейдите на `http://127.0.0.1` в вашем браузере.
 - Зарегистрируйтесь или войдите в систему для доступа к личному кабинету.
 - Просматривайте рецепты в каталоге или получите случайный рецепт.
 - Настройте свои предпочтения по использованию файлов cookie.
@@ -88,24 +123,38 @@
 ## Структура проекта
 
 ```
-gastro-ugolok/
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── auth.py
-│   ├── database.py
-│   ├── models.py
-│   ├── routers/
-│   │   ├── __init__.py
-│   │   ├── auth_router.py
-│   │   └── main_router.py
-│   └── templates/
-│       └── ... (HTML-шаблоны)
-├── static/
-│   └── ... (CSS, изображения)
-├── .env.example
-├── requirements.txt
-└── README.md
+├── .env.example            # Пример файла с переменными окружения
+├── LICENCE                 # Лицензия проекта
+├── README.md               # Документация проекта
+├── requirements.txt        # Зависимости проекта
+│
+├── app/                    # Основной код приложения
+│   ├── auth.py             # Аутентификация
+│   ├── main.py             # Главный файл приложения
+│   ├── models.py           # Модели данных
+│   │
+│   ├── api/                # API приложения
+│   │   └── routers/        # Маршрутизаторы API
+│   │
+│   ├── crud/               # Операции с базой данных
+│   │   ├── base.py
+│   │   ├── initialization.py
+│   │   ├── mysql.py
+│   │   └── sqlite.py
+│   │
+│   └── web/                # Веб-интерфейс
+│       ├── middleware.py
+│       └── routers/        # Маршрутизаторы веб-интерфейса
+│
+├── static/                 # Статические файлы
+│   ├── css/                # Стили
+│   ├── fonts/              # Шрифты
+│   ├── images/             # Изображения
+│   ├── js/                 # JavaScript файлы
+│   └── recipesbase/        # База рецептов
+│
+└── templates/              # HTML шаблоны
+    └── account/            # Шаблоны личного кабинета
 ```
 
 ## Вклад в проект

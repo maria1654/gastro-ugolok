@@ -239,7 +239,6 @@ async def delete_recipe_route(request: Request, rid: str):
                 detail="Рецепт не найден или не может быть удален"
             )
         
-        # Также удаляем файлы изображений рецепта
         recipe_dir = Path(f"static/recipesbase/{rid}")
         if recipe_dir.exists():
             for file in recipe_dir.glob('*'):
