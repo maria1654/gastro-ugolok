@@ -60,7 +60,7 @@
 1. **Клонирование репозитория**
 
    ```bash
-   git clone https://github.com/yourusername/gastro-ugolok.git
+   git clone https://github.com/maria1654/gastro-ugolok.git
    cd gastro-ugolok
    ```
 
